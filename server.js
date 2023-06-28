@@ -20,11 +20,22 @@ app.post('/shortUrls', async (req, res) => {
     return res.sendStatus(400)
   }
 
-  if (req.body.shortUrl == '') {
-    await ShortUrl.create({ full: req.body.fullUrl })
-  } else {
-    await ShortUrl.create({ full: req.body.fullUrl, short: req.body.shortUrl })
+  newUrl = { full: req.body.fullUrl }
+
+  if (req.body.shortUrl != '') {
+    newUrl.short = req.body.shortUrl
   }
+
+  if (req.body.utmSource != '') {
+    newUrl.utmSource = req.body.campaignSource
+    newUrl.utmMedium = req.body.campaignMedium
+    newUrl.utmName = req.body.campaignName
+    newUrl.redirectTo = `${req.body.fullUrl}?utm_source=${req.body.campaignSource}&utm_medium=${req.body.campaignMedium}&utm_name=${req.body.campaignName}`
+  } else {
+    newUrl.redirectTo = req.body.fullUrl
+  }
+
+  await ShortUrl.create(newUrl)
 
   res.redirect('/')
 })
@@ -48,7 +59,7 @@ app.get('/:reqShortUrl', async (req, res) => {
   shortUrl.clicks++
   await ShortUrl.replaceOne({ _id: shortUrl._id }, shortUrl)
 
-  res.redirect(shortUrl.full)
+  res.redirect(shortUrl.redirectTo)
 })
 
 app.listen(process.env.PORT || 3000)
