@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>URL Shortener</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -24,6 +24,21 @@
           <label for="shortUrl" class="form-label">Custom Short URL</label>
           <input type="text" class="form-control" id="shortUrl" name="shortUrl" aria-describedby="shortUrlHelp">
           <div id="shortUrlHelp" class="form-text">(Optional) Add your own slags.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">UTM Tags</label>
+
+          <label for="campaignSource" class="form-label visually-hidden">Campaign Source</label>
+          <input type="text" placeholder="Campaign Source" class="form-control" id="campaignSource" name="campaignSource" aria-describedby="campaignSourceHelp">
+          <div id="campaignSourceHelp" class="form-text mb-4">(Optional) The referrer.</div>
+          
+          <label for="campaignMedium" class="form-label visually-hidden">Campaign Medium</label>
+          <input type="text" placeholder="Campaign Medium" class="form-control" id="campaignMedium" name="campaignMedium" aria-describedby="campaignMediumHelp">
+          <div id="campaignMediumHelp" class="form-text mb-4">(Optional) Marketing Medium.</div>
+          
+          <label for="campaignName" class="form-label visually-hidden">Campaign Name</label>
+          <input type="text" placeholder="Campaign Name" class="form-control" id="campaignName" name="campaignName" aria-describedby="campaignNameHelp">
+          <div id="campaignNameHelp" class="form-text mb-4">(Optional) Product, promocode, or slogan.</div>
         </div>
         <button type="submit" class="btn btn-primary mt-2">Short!</button>
       </form>
