@@ -40,5 +40,4 @@ const shortUrlSchema = new mongoose.Schema(
 
 const model = mongoose.model('ShortUrl', shortUrlSchema)
 
-export const { schema } = model
 export default model
