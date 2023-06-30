@@ -57,7 +57,7 @@
         <tr>
           <td class="align-middle d-flex flex-column">
             <a href="<%= shortUrl.full %>"><%= shortUrl.full %></a>
-            <% if (shortUrl.utmSource != ""){ %>
+            <% if (shortUrl.utmSource){ %>
             <label>
               <%= `${capitalizeFirst(shortUrl.utmSource)}・${capitalizeFirst(shortUrl.utmMedium)}・${capitalizeFirst(shortUrl.utmName)}` %>
             </label>

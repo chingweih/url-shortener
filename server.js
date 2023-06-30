@@ -22,11 +22,11 @@ app.post('/shortUrls', async (req, res) => {
 
   newUrl = { full: req.body.fullUrl }
 
-  if (req.body.shortUrl != '') {
+  if (req.body.shortUrl) {
     newUrl.short = req.body.shortUrl
   }
 
-  if (req.body.utmSource != '') {
+  if (req.body.campaignSource) {
     newUrl.utmSource = req.body.campaignSource
     newUrl.utmMedium = req.body.campaignMedium
     newUrl.utmName = req.body.campaignName
@@ -56,8 +56,7 @@ app.get('/:reqShortUrl', async (req, res) => {
     return res.sendStatus(404)
   }
 
-  shortUrl.clicks++
-  await ShortUrl.replaceOne({ _id: shortUrl._id }, shortUrl)
+  await ShortUrl.updateOne({ _id: shortUrl._id }, { $inc: { clicks: 1 } })
 
   res.redirect(shortUrl.redirectTo)
 })
