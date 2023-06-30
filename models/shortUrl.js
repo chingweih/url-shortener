@@ -1,8 +1,12 @@
-const mongoose = require('mongoose')
-const shortId = require('shortid')
+import mongoose from 'mongoose'
+import shortId from 'shortid'
 
 const shortUrlSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+      required: true,
+    },
     full: {
       type: String,
       required: true,
@@ -34,4 +38,7 @@ const shortUrlSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-module.exports = mongoose.model('ShortUrl', shortUrlSchema)
+const model = mongoose.model('ShortUrl', shortUrlSchema)
+
+export const { schema } = model
+export default model

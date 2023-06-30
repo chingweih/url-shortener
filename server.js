@@ -1,6 +1,7 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const ShortUrl = require('./models/shortUrl')
+import express from 'express'
+import mongoose from 'mongoose'
+import ShortUrl from './models/shortUrl.js'
+import getTitleAtUrl from 'get-title-at-url'
 const app = express()
 
 mongoose.connect('mongodb://localhost/urlShortener', {
@@ -20,7 +21,9 @@ app.post('/shortUrls', async (req, res) => {
     return res.sendStatus(400)
   }
 
-  newUrl = { full: req.body.fullUrl }
+  const { title } = await getTitleAtUrl(req.body.fullUrl)
+
+  let newUrl = { title: title, full: req.body.fullUrl }
 
   if (req.body.shortUrl) {
     newUrl.short = req.body.shortUrl
